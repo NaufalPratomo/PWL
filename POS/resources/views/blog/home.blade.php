@@ -2,7 +2,8 @@
 <html>
 
 <body>
-    <h1>Home Page</h1>
+    <h1>Selamat Datang di Toko Kami</h1>
+    <p>Halaman awal website</p>
 </body>
 
 </html>

@@ -2,7 +2,8 @@
 <html>
 
 <body>
-    <h1>Sales Page</h1>
+    <h1>Halaman Penjualan</h1>
+    <p>Menampilkan halaman transaksi POS</p>
 </body>
 
 </html>

@@ -12,12 +12,12 @@ use App\Http\Controllers\SalesController;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
+| routes are loaded by the RouteServiceProvider within a group which
+| contains the "web" middleware group. Now create something great!
 |
 */
 
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/products', [ProductsController::class, 'index']);
-Route::get('/user', [UserController::class, 'index']);
+Route::get('/user/{id}/name/{name}', [UserController::class, 'index']);
 Route::get('/sales', [SalesController::class, 'index']);
