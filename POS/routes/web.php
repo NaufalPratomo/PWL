@@ -21,3 +21,4 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/products', [ProductsController::class, 'index']);
 Route::get('/user/{id}/name/{name}', [UserController::class, 'index']);
 Route::get('/sales', [SalesController::class, 'index']);
+
