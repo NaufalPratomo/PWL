@@ -5,6 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\LevelController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,8 +18,8 @@ use App\Http\Controllers\SalesController;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/products', [ProductsController::class, 'index']);
-Route::get('/user/{id}/name/{name}', [UserController::class, 'index']);
-Route::get('/sales', [SalesController::class, 'index']);
+Route::get('/', function () {
+    return view('welcome');
+});
 
+Route::get('/level', [LevelController::class, 'index']);
