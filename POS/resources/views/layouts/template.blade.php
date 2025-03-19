@@ -5,14 +5,22 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>{{config('app.name', 'PWL Laravel Starter Code')}}</title> <!-- spell-checker: disable-line -->
+  <meta name="csrf-token" content="{{ csrf_token() }}"> <!-- Laravel CSRF token untuk keamanan -->
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet"
-    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback"> <!-- spell-checker: disable-line -->
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- spell-checker: disable-line -->
   <!-- Font Awesome -->
-  <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}"> <!-- spell-checker: disable-line -->
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/fontawesome-free/css/all.min.css') }}">
+  <!-- spell-checker: disable-line -->
+  <!-- DataTables -->
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-responsive/css/responsive.bootstrap4.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('adminlte/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('adminlte/dist/css/adminlte.min.css')}}"> <!-- spell-checker: disable-line -->
+  @stack('css') <!-- Digunakan untuk menyisipkan custom CSS dari view -->
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -26,7 +34,7 @@
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
       <!-- Brand Logo -->
       <a href="{{ url('/')}}" class="brand-link">
-        <img src="{{asset('adminlte/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo" 
+        <img src="{{asset('adminlte/dist/img/AdminLTELogo.png')}}" alt="AdminLTE Logo"
           class="brand-image img-circle elevation-3" style="opacity: .8">
         <span class="brand-text font-weight-light">PWL - starter ode</span>
       </a>
@@ -55,9 +63,28 @@
   <!-- jQuery -->
   <script src="{{ asset('adminlte/plugins/jquery/jquery.min.js')}}"></script> <!-- spell-checker: disable-line -->
   <!-- Bootstrap 4 -->
-  <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script> <!-- spell-checker: disable-line -->
+  <script src="{{ asset('adminlte/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+  <!-- spell-checker: disable-line -->
+  <!-- DataTables & Plugins -->
+  <script src="{{ asset('adminlte/plugins/datatables/jquery.dataTables.min.js') }}"></script>
+  <script src="{{ asset('adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('adminlte/plugins/datatables-responsive/js/dataTables.responsive.min.js') }}"></script>
+  <script src="{{ asset('adminlte/plugins/datatables-responsive/js/responsive.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('adminlte/plugins/datatables-buttons/js/dataTables.buttons.min.js') }}"></script>
+  <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+  <script src="{{ asset('adminlte/plugins/jszip/jszip.min.js') }}"></script>
+  <script src="{{ asset('adminlte/plugins/pdfmake/pdfmake.min.js') }}"></script>
+  <script src="{{ asset('adminlte/plugins/pdfmake/vfs_fonts.js') }}"></script>
+  <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+  <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+  <script src="{{ asset('adminlte/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script>
   <!-- AdminLTE App -->
   <script src="{{ asset('adminlte/dist/js/adminlte.min.js')}}"></script> <!-- spell-checker: disable-line -->
+  <script>
+    // Untuk mengirimkan token Laravel CSRF pada setiap request AJAX
+    $.ajaxSetup({ headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') } });
+  </script>
+  @stack('js') <!-- Digunakan untuk custom JavaScript dari masing-masing view -->
 </body>
 
 </html>
