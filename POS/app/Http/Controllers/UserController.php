@@ -197,4 +197,45 @@ confirm(\'Apakah Anda yakit menghapus data ini?\');">Hapus</button></form>';
             return redirect('/user')->with('error', 'Data user gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
         }
     }
+
+    public function create_ajax(){
+        $level = LevelModel::select('level_id', 'level_nama')->get();
+        return view('user.create_ajax')
+            ->with('level', $level);
+    }
+
+    public function store_ajax(Request $request) {
+        // Cek apakah request berupa AJAX atau JSON
+        if ($request->ajax() || $request->wantsJson()) {
+            $rules = [
+                'level_id' => 'required|integer',
+                'username' => 'required|string|min:3|unique:m_user,username',
+                'nama' => 'required|string|max:100',
+                'password' => 'required|min:6'
+            ];
+    
+            // Gunakan Validator untuk memvalidasi data
+            $validator = Validator::make($request->all(), $rules);
+    
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => false, // Status false menunjukkan validasi gagal
+                    'message' => 'Validasi Gagal',
+                    'msgField' => $validator->errors() // Pesan error validasi
+                ]);
+            }
+    
+            // Simpan data ke database
+            UserModel::create($request->all());
+    
+            return response()->json([
+                'status' => true, // Status true menunjukkan validasi berhasil
+                'message' => 'Data user berhasil disimpan'
+            ]);
+        }
+    
+        // Jika bukan AJAX, redirect ke halaman utama
+        return redirect('/');
+    }
+    
 }
