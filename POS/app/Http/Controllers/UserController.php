@@ -293,6 +293,40 @@ class UserController extends Controller
         }
 
         // Jika bukan request AJAX, redirect ke halaman utama
-        return redirect('/');
+        redirect('/');
+    }
+
+    public function confirm_ajax($id)
+    {
+        $user = UserModel::find($id);
+        return view('user.confirm_ajax')
+            ->with('user', $user);
+    }
+
+    public function delete_ajax(Request $request, $id)
+    {
+        // Cek apakah request berasal dari AJAX atau JSON
+        if ($request->ajax() || $request->wantsJson()) {
+            // Cari data user berdasarkan ID
+            $user = UserModel::find($id);
+
+            if ($user) {
+                // Hapus data user
+                $user->delete();
+                return response()->json([
+                    'status' => true,
+                    'message' => 'Data berhasil dihapus'
+                ]);
+            } else {
+                // Jika data tidak ditemukan
+                return response()->json([
+                    'status' => false,
+                    'message' => 'Data tidak ditemukan'
+                ]);
+            }
+        }
+
+        // Redirect ke halaman utama jika bukan request AJAX
+        redirect('/');
     }
 }
