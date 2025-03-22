@@ -293,7 +293,7 @@ class UserController extends Controller
         }
 
         // Jika bukan request AJAX, redirect ke halaman utama
-        redirect('/');
+        return redirect('/');
     }
 
     public function confirm_ajax($id)
@@ -327,6 +327,16 @@ class UserController extends Controller
         }
 
         // Redirect ke halaman utama jika bukan request AJAX
-        redirect('/');
+        return redirect('/');
+    }
+    public function show_ajax(string $id)
+    {
+        $user = UserModel::find($id);
+        $level = LevelModel::select('level_id', 'level_nama')->get();
+
+        return view('user.show_ajax', [
+            'user' => $user,
+            'level' => $level
+        ]);
     }
 }
