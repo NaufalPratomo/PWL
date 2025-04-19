@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\LevelModel;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\QueryException;
 
 class LevelController extends Controller
 {
@@ -164,23 +165,21 @@ class LevelController extends Controller
 
     public function delete_ajax(Request $request, $id)
     {
-        // cek apakah request dari ajax
         if ($request->ajax() || $request->wantsJson()) {
             $level = LevelModel::find($id);
             if ($level) {
                 try {
-                    LevelModel::destroy($id);    // Hapus data user
-
-                    return redirect('/user')->with('success', 'Data user berhasil dihapus');
-                } catch (\Illuminate\Database\QueryException $e) {
-                    // Jika terjadi error ketika menghapus data, redirect kembali ke halaman dengan membawa pesan error
-                    return redirect('/user')->with('error', 'Data user gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini');
+                    $level->delete();
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'Data berhasil dihapus'
+                    ]);
+                } catch (QueryException $e) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Data gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini'
+                    ]);
                 }
-                $level->delete();
-                return response()->json([
-                    'status' => true,
-                    'message' => 'Data berhasil dihapus'
-                ]);
             } else {
                 return response()->json([
                     'status' => false,

@@ -2,11 +2,11 @@
 <html>
 
 <head>
-    <title>Data Kategori Barang</title>
+    <title>Data Kategori Sepatu</title>
 </head>
 
 <body>
-    <h1>Data Kategori Barang</h1>
+    <h1>Data Kategori Sepatu</h1>
     <table border="1" cellpadding="2" cellspacing="0">
         <tr>
             <th>ID</th>

@@ -7,6 +7,7 @@ use App\Models\UserModel;
 use Illuminate\Http\Request;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\QueryException;
 
 class UserController extends Controller
 {
@@ -188,28 +189,36 @@ class UserController extends Controller
 
     public function delete_ajax(Request $request, $id)
     {
-        // Cek apakah request berasal dari AJAX atau JSON
         if ($request->ajax() || $request->wantsJson()) {
-            // Cari data user berdasarkan ID
             $user = UserModel::find($id);
-
             if ($user) {
-                // Hapus data user
-                $user->delete();
-                return response()->json([
-                    'status' => true,
-                    'message' => 'Data berhasil dihapus'
-                ]);
+                try {
+                    $user->delete();
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'Data berhasil dihapus'
+                    ]);
+                } catch (QueryException $e) {
+                    // Cek jika kesalahan karena foreign key constraint violation
+                    if ($e->getCode() == 23000) { // 23000 adalah kode error untuk integrity constraint violation
+                        return response()->json([
+                            'status' => false,
+                            'message' => 'Data user gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini'
+                        ]);
+                    }
+                    // Jika kesalahan lainnya
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Gagal menghapus data: ' . $e->getMessage()
+                    ]);
+                }
             } else {
-                // Jika data tidak ditemukan
                 return response()->json([
                     'status' => false,
                     'message' => 'Data tidak ditemukan'
                 ]);
             }
         }
-
-        // Redirect ke halaman utama jika bukan request AJAX
         return redirect('/');
     }
     public function show_ajax(string $id)

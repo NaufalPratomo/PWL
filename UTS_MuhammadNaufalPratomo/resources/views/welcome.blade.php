@@ -4,11 +4,13 @@
 
 <div class="card">
     <div class="card-header">
-        <h3 class="card-title">Halo, apakabar!!!</h3>
+        <h3 class="card-title">Have a nice day our Admin</h3>
         <div class="card-tools"></div>
     </div>
     <div class="card-body">
-        Selamat datang semua, ini adalah halaman utama dari aplikasi ini.
+        Welcome Admin <br>
+        Enjoy Your Day and Do It Your Job carefully <br>
+        Thankyouu ☺️
     </div>
 </div>
 
