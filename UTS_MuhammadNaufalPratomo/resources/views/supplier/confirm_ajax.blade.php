@@ -40,6 +40,10 @@
                             <th class="text-right col-3">Nama Supplier :</th>
                             <td class="col-9">{{ $supplier->supplier_nama }}</td>
                         </tr>
+                        <tr>
+                            <th class="text-right col-3">Kode Supplier :</th>
+                            <td class="col-9">{{ $supplier->supplier_kode }}</td>
+                        </tr>
                     </table>
                 </div>
                 <div class="modal-footer">

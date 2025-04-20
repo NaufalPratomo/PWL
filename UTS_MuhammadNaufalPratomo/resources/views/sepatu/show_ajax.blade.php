@@ -44,6 +44,9 @@
                         <td>{{ $sepatu->sepatu_kode }}</td>
                     </tr>
                     <tr>
+                        <th>Nama Sepatu</th>
+                        <td>{{ $sepatu->sepatu_nama }}</td>
+                    <tr>
                         <th>Harga Beli</th>
                         <td>Rp {{ number_format($sepatu->harga_beli, 0, ',', '.') }}</td>
                     </tr>

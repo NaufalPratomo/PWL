@@ -34,8 +34,8 @@ class UserSeeder extends Seeder
             [
                 'user_id' => 3,
                 'level_id' => 3,
-                'username' => 'kasir',
-                'nama' => 'Kasir',
+                'username' => 'staff',
+                'nama' => 'Staff',
                 'password' => Hash::make('12345'),
             ],
         ];
