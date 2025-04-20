@@ -1,3 +1,5 @@
+{{-- Form modal untuk membuat level baru melalui AJAX. --}}
+
 <form action="{{ url('/level/ajax') }}" method="POST" id="form-tambah">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">

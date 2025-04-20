@@ -1,3 +1,5 @@
+{{-- Halaman yang menampilkan daftar kategori sepatu dalam bentuk tabel dengan fitur DataTables. --}}
+
 @extends('layouts.template')
 
 @section('content')

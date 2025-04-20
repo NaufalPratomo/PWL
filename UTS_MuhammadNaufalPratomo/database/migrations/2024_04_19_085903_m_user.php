@@ -4,6 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// Migration yang membuat tabel 'm_user' untuk menyimpan data pengguna aplikasi dengan kolom-kolom:
+// - user_id (primary key)
+// - level_id (foreign key ke tabel m_level)
+// - username (username pengguna, unique, max 20 karakter)
+// - nama (nama pengguna, max 100 karakter)
+// - password (password terenkripsi)
+// - timestamps (created_at dan updated_at)
+
 return new class extends Migration
 {
     /**

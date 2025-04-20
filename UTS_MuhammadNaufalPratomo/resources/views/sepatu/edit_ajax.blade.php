@@ -1,3 +1,6 @@
+{{-- Form modal untuk mengedit data sepatu melalui AJAX dengan dropdown kategori dan supplier.
+ --}}
+
 @empty($sepatu)
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

@@ -1,3 +1,5 @@
+{{-- Form modal untuk membuat supplier baru melalui AJAX. --}}
+
 <form action="{{ url('/supplier/ajax') }}" method="POST" id="form-tambah">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">

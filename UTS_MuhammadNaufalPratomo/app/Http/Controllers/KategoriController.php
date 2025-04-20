@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class KategoriController extends Controller
 {
+    //Menampilkan halaman daftar kategori dengan breadcrumb dan informasi halaman.
     public function index()
     {
         $breadcrumb = (object) [
@@ -27,7 +28,7 @@ class KategoriController extends Controller
         return view('kategori.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kategori' => $kategori, 'activeMenu' => $activeMenu]);
     }
 
-    // Ambil data kategori dalam bentuk json untuk datatables
+    // Menyediakan data kategori dalam format JSON untuk DataTables dengan kolom aksi untuk detail, edit, dan hapus.
     public function list()
     {
         $kategori = KategoriModel::select('kategori_id', 'kategori_kode', 'kategori_nama');
@@ -45,35 +46,13 @@ class KategoriController extends Controller
             ->make(true);
     }
 
-    // Menampilkan detail kategori
-    public function show(string $id)
-    {
-        $kategori = KategoriModel::find($id);
-
-        $breadcrumb = (object) [
-            'title' => 'Detail Kategori',
-            'list'  => ['Home', 'Kategori', 'Detail']
-        ];
-
-        $page = (object) [
-            'title' => 'Detail Kategori'
-        ];
-
-        $activeMenu = 'kategori'; // set menu yang sedang aktif
-
-        return view('kategori.show', [
-            'breadcrumb' => $breadcrumb,
-            'page' => $page,
-            'kategori' => $kategori,
-            'activeMenu' => $activeMenu
-        ]);
-    }
-
+    //Menampilkan form untuk membuat kategori baru melalui AJAX.
     public function create_ajax()
     {
         return view('kategori.create_ajax');
     }
 
+    //Menyimpan data kategori baru dari form AJAX dengan validasi.
     public function store_ajax(Request $request)
     {
         // cek apakah request berupa ajax
@@ -103,6 +82,7 @@ class KategoriController extends Controller
         redirect('/');
     }
 
+    //Menampilkan form untuk mengedit kategori melalui AJAX.
     public function edit_ajax(string $id)
     {
         $kategori = KategoriModel::find($id);
@@ -112,6 +92,7 @@ class KategoriController extends Controller
         ]);
     }
 
+    //Memperbarui data kategori dari form AJAX dengan validasi.
     public function update_ajax(Request $request, $id)
     {
         // cek apakah request dari ajax
@@ -152,12 +133,14 @@ class KategoriController extends Controller
         return redirect('/');
     }
 
+    //Menampilkan konfirmasi sebelum menghapus kategori.
     public function confirm_ajax(string $id)
     {
         $kategori = KategoriModel::find($id);
         return view('kategori.confirm_ajax', ['kategori' => $kategori]);
     }
 
+    //Menghapus data kategori berdasarkan ID melalui AJAX.
     public function delete_ajax(Request $request, $id)
     {
         // cek apakah request dari ajax
@@ -178,6 +161,8 @@ class KategoriController extends Controller
         }
         return redirect('/');
     }
+
+    //Menampilkan detail kategori dalam format AJAX.
     public function show_ajax(string $id)
     {
         $kategori = KategoriModel::find($id);

@@ -1,3 +1,5 @@
+{{-- Form modal untuk membuat data sepatu baru melalui AJAX dengan dropdown kategori dan supplier. --}}
+
 <form action="{{ url('/sepatu/ajax') }}" method="POST" id="form-tambah">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">

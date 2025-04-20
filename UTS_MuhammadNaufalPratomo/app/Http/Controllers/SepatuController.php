@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 
 class SepatuController extends Controller
 {
-    //Menampilkan halaman awal user
+    //Menampilkan halaman daftar sepatu dengan breadcrumb, informasi halaman, dan data kategori untuk filter.
     public function index()
     {
         $breadcrumb = (object) [
@@ -32,7 +32,7 @@ class SepatuController extends Controller
         return view('sepatu.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'kategori' => $kategori, 'activeMenu' => $activeMenu, 'sepatu' => $sepatu]);
     }
 
-    // Ambil data sepatu dalam bentuk json untuk datatables
+    // Menyediakan data sepatu dalam format JSON untuk DataTables dengan relasi kategori dan supplier, serta filter berdasarkan kategori.
     public function list(Request $request)
     {
         $sepatu = SepatuModel::select('sepatu_id', 'kategori_id', 'sepatu_kode', 'sepatu_nama', 'harga_beli', 'harga_jual', 'supplier_id')
@@ -57,30 +57,7 @@ class SepatuController extends Controller
             ->make(true);
     }
 
-    // Menampilkan detail sepatu
-    public function show(string $id)
-    {
-        $sepatu = SepatuModel::with(['kategori', 'supplier'])->find($id);
-
-        $breadcrumb = (object) [
-            'title' => 'Detail sepatu',
-            'list'  => ['Home', 'sepatu', 'Detail']
-        ];
-
-        $page = (object) [
-            'title' => 'Detail sepatu'
-        ];
-
-        $activeMenu = 'sepatu'; // set menu yang sedang aktif
-
-        return view('sepatu.show', [
-            'breadcrumb' => $breadcrumb,
-            'page' => $page,
-            'sepatu' => $sepatu,
-            'activeMenu' => $activeMenu
-        ]);
-    }
-
+    //Menampilkan form untuk membuat data sepatu baru melalui AJAX dengan data kategori dan supplier.
     public function create_ajax()
     {
         $kategori = KategoriModel::all();
@@ -92,6 +69,7 @@ class SepatuController extends Controller
         ]);
     }
 
+    //Menampilkan form untuk membuat data sepatu baru melalui AJAX dengan data kategori dan supplier.
     public function store_ajax(Request $request)
     {
         // cek apakah request berupa ajax
@@ -125,6 +103,7 @@ class SepatuController extends Controller
         redirect('/');
     }
 
+    //Menampilkan form untuk mengedit data sepatu melalui AJAX dengan data kategori dan supplier.
     public function edit_ajax(string $id)
     {
         $sepatu = SepatuModel::find($id);
@@ -138,6 +117,7 @@ class SepatuController extends Controller
         ]);
     }
 
+    //Memperbarui data sepatu dari form AJAX dengan validasi.
     public function update_ajax(Request $request, $id)
     {
         // cek apakah request dari ajax
@@ -179,12 +159,14 @@ class SepatuController extends Controller
         return redirect('/');
     }
 
+    //Menampilkan konfirmasi sebelum menghapus data sepatu.
     public function confirm_ajax(string $id)
     {
         $sepatu = SepatuModel::find($id);
         return view('sepatu.confirm_ajax', ['sepatu' => $sepatu]);
     }
 
+    //Menghapus data sepatu berdasarkan ID melalui AJAX.
     public function delete_ajax(Request $request, $id)
     {
         // cek apakah request dari ajax
@@ -205,6 +187,8 @@ class SepatuController extends Controller
         }
         return redirect('/');
     }
+
+    //Menampilkan detail sepatu dalam format AJAX.
     public function show_ajax(string $id)
     {
         $sepatu = SepatuModel::find($id);

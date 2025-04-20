@@ -4,6 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// Migration yang membuat tabel 'm_level' untuk menyimpan data level pengguna dengan kolom-kolom:
+// - level_id (primary key)
+// - level_kode (kode level, unique, max 10 karakter)
+// - level_nama (nama level, max 100 karakter)
+// - timestamps (created_at dan updated_at)
+
 return new class extends Migration
 {
     /**

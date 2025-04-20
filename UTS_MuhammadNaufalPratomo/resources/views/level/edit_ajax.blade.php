@@ -1,3 +1,5 @@
+{{-- Form modal untuk mengedit level melalui AJAX. --}}
+
 @empty($level)
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

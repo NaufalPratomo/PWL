@@ -1,3 +1,6 @@
+{{-- Modal konfirmasi untuk menghapus pengguna.
+ --}}
+
 @empty($user)
 <div id="modal-master" class="modal-dialog modal-lg" role="document">
     <div class="modal-content">

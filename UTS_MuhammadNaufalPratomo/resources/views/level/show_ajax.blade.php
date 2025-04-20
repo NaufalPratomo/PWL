@@ -1,3 +1,5 @@
+{{-- Halaman yang menampilkan detail level pengguna tertentu. --}}
+
 @empty($level)
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">

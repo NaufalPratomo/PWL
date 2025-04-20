@@ -7,6 +7,8 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
+// Seeder yang mengisi data awal untuk tabel m_user dengan data pengguna default seperti admin dengan username dan password tertentu.
+
 class UserSeeder extends Seeder
 {
     /**

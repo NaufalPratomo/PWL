@@ -1,3 +1,5 @@
+{{-- Form modal untuk membuat pengguna baru melalui AJAX dengan dropdown level. --}}
+
 <form action="{{ url('/user/ajax') }}" method="POST" id="form-tambah">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">

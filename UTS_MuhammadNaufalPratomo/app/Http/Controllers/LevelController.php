@@ -11,12 +11,14 @@ use Illuminate\Database\QueryException;
 
 class LevelController extends Controller
 {
+    //Menyisipkan data level baru (Customer) langsung ke database.
     public function insertLevel()
     {
         DB::insert('insert into m_level(level_kode, level_nama, created_at) values(?, ?, ?)', ['CUS', 'Customer', now()]);
         return 'Inser data baru berhasil';
     }
 
+    //Menampilkan halaman daftar level dengan breadcrumb dan informasi halaman.
     public function index()
     {
 
@@ -33,7 +35,7 @@ class LevelController extends Controller
         return view('level.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
-    // Ambil data level dalam bentuk json untuk datatables
+    // Menyediakan data level dalam format JSON untuk DataTables dengan kolom aksi.
     public function list()
     {
         $levels = LevelModel::select('level_id', 'level_kode', 'level_nama');
@@ -51,34 +53,13 @@ class LevelController extends Controller
             ->make(true);
     }
 
-    // Menampilkan detail level
-    public function show(string $id)
-    {
-        $level = LevelModel::find($id);
-
-        $breadcrumb = (object) [
-            'title' => 'Detail Level',
-            'list'  => ['Home', 'Level', 'Detail']
-        ];
-
-        $page = (object) [
-            'title' => 'Detail Level'
-        ];
-
-        $activeMenu = 'level'; // set menu yang sedang aktif
-
-        return view('level.show', [
-            'breadcrumb' => $breadcrumb,
-            'page' => $page,
-            'level' => $level,
-            'activeMenu' => $activeMenu
-        ]);
-    }
+    //Menampilkan form untuk membuat level baru melalui AJAX.
     public function create_ajax()
     {
         return view('level.create_ajax');
     }
 
+    //Menyimpan data level baru dari form AJAX dengan validasi.
     public function store_ajax(Request $request)
     {
         // cek apakah request berupa ajax
@@ -108,6 +89,7 @@ class LevelController extends Controller
         redirect('/');
     }
 
+    //Menyimpan data level baru dari form AJAX dengan validasi.
     public function edit_ajax(string $id)
     {
         $level = LevelModel::find($id);
@@ -117,6 +99,7 @@ class LevelController extends Controller
         ]);
     }
 
+    //Memperbarui data level dari form AJAX dengan validasi.
     public function update_ajax(Request $request, $id)
     {
         // cek apakah request dari ajax
@@ -157,12 +140,14 @@ class LevelController extends Controller
         return redirect('/');
     }
 
+    //Menampilkan konfirmasi sebelum menghapus level.
     public function confirm_ajax(string $id)
     {
         $level = LevelModel::find($id);
         return view('level.confirm_ajax', ['level' => $level]);
     }
 
+    //Menghapus data level berdasarkan ID melalui AJAX.
     public function delete_ajax(Request $request, $id)
     {
         if ($request->ajax() || $request->wantsJson()) {
@@ -189,6 +174,8 @@ class LevelController extends Controller
         }
         return redirect('/');
     }
+
+    //Menampilkan detail level dalam format AJAX.
     public function show_ajax(string $id)
     {
         $level = LevelModel::find($id);

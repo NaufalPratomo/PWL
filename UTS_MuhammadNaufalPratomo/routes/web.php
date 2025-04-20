@@ -18,8 +18,11 @@ use App\Http\Controllers\UserController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+// Route untuk halaman welcome:
 Route::get('/', [WelcomeController::class, 'index']);
 
+// Route untuk manajemen user:
 Route::group(['prefix' => 'user'], function () {
     Route::get('/', [UserController::class, 'index']);              // Menampilkan halaman awal user
     Route::post('/list', [UserController::class, 'list']);          // Menampilkan data user dalam bentuk json untuk datatables
@@ -33,6 +36,7 @@ Route::group(['prefix' => 'user'], function () {
     Route::delete('/{id}', [UserController::class, 'destroy']);     // Menghapus data user
 });
 
+// Route untuk manajemen level:
 Route::group(['prefix' => 'level'], function () {
     Route::get('/', [LevelController::class, 'index']);              // Menampilkan halaman awal level
     Route::post('/list', [LevelController::class, 'list']);          // Menampilkan data level dalam bentuk json untuk datatables
@@ -46,6 +50,7 @@ Route::group(['prefix' => 'level'], function () {
     Route::delete('/{id}', [LevelController::class, 'destroy']);     // Menghapus data level
 });
 
+// Route untuk manajemen kategori:
 Route::group(['prefix' => 'kategori'], function () {
     Route::get('/', [KategoriController::class, 'index']);              // Menampilkan halaman awal kategori
     Route::post('/list', [KategoriController::class, 'list']);          // Menampilkan data kategori dalam bentuk json untuk datatables
@@ -59,6 +64,7 @@ Route::group(['prefix' => 'kategori'], function () {
     Route::delete('/{id}', [KategoriController::class, 'destroy']);     // Menghapus data kategori
 });
 
+// Route untuk manajemen supplier:
 Route::group(['prefix' => 'supplier'], function () {
     Route::get('/', [SupplierController::class, 'index']);              // Menampilkan halaman awal supplier
     Route::post('/list', [SupplierController::class, 'list']);          // Menampilkan data supplier dalam bentuk json untuk datatables
@@ -72,6 +78,7 @@ Route::group(['prefix' => 'supplier'], function () {
     Route::delete('/{id}', [SupplierController::class, 'destroy']);     // Menghapus data supplier
 });
 
+// Route untuk manajemen sepatu:
 Route::group(['prefix' => 'sepatu'], function () {
     Route::get('/', [SepatuController::class, 'index']);              // Menampilkan halaman awal Sepatu
     Route::post('/list', [SepatuController::class, 'list']);          // Menampilkan data Sepatu dalam bentuk json untuk datatables

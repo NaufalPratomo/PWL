@@ -11,7 +11,7 @@ use Illuminate\Database\QueryException;
 
 class UserController extends Controller
 {
-    //Menampilkan halaman awal user
+    //Menampilkan halaman daftar pengguna dengan breadcrumb, informasi halaman, dan data level untuk filter.
     public function index()
     {
         $breadcrumb = (object) [
@@ -30,7 +30,7 @@ class UserController extends Controller
         return view('user.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'level' => $level, 'activeMenu' => $activeMenu]);
     }
 
-    // Ambil data user dalam bentuk json untuk datatables
+    //Menyediakan data pengguna dalam format JSON untuk DataTables dengan relasi level dan filter berdasarkan level.
     public function list(Request $request)
     {
         $users = UserModel::select('user_id', 'username', 'nama', 'level_id')
@@ -54,30 +54,7 @@ class UserController extends Controller
             ->make(true);
     }
 
-    // Menampilkan detail user
-    public function show(string $id)
-    {
-        $user = UserModel::with('level')->find($id);
-
-        $breadcrumb = (object) [
-            'title' => 'Detail User',
-            'list'  => ['Home', 'User', 'Detail']
-        ];
-
-        $page = (object) [
-            'title' => 'Detail user'
-        ];
-
-        $activeMenu = 'user'; // set menu yang sedang aktif
-
-        return view('user.show', [
-            'breadcrumb' => $breadcrumb,
-            'page' => $page,
-            'user' => $user,
-            'activeMenu' => $activeMenu
-        ]);
-    }
-
+    //Menampilkan form untuk membuat pengguna baru melalui AJAX dengan data level.
     public function create_ajax()
     {
         $level = LevelModel::select('level_id', 'level_nama')->get();
@@ -86,6 +63,7 @@ class UserController extends Controller
             ->with('level', $level);
     }
 
+    //Menyimpan data pengguna baru dari form AJAX dengan validasi.
     public function store_ajax(Request $request)
     {
         // cek apakah request berupa ajax
@@ -117,6 +95,7 @@ class UserController extends Controller
         redirect('/');
     }
 
+    //Menampilkan form untuk mengedit pengguna melalui AJAX dengan data level.
     public function edit_ajax($id)
     {
         $user = UserModel::find($id);
@@ -126,6 +105,7 @@ class UserController extends Controller
             ->with('level', $level);
     }
 
+    //Memperbarui data pengguna dari form AJAX dengan validasi.
     public function update_ajax(Request $request, $id)
     {
         // Cek apakah request berasal dari AJAX atau JSON
@@ -180,6 +160,7 @@ class UserController extends Controller
         return redirect('/');
     }
 
+    //Menampilkan form konfirmasi penghapusan pengguna melalui AJAX.
     public function confirm_ajax($id)
     {
         $user = UserModel::find($id);
@@ -187,6 +168,7 @@ class UserController extends Controller
             ->with('user', $user);
     }
 
+    //Menghapus data pengguna berdasarkan ID melalui AJAX.
     public function delete_ajax(Request $request, $id)
     {
         if ($request->ajax() || $request->wantsJson()) {
@@ -221,6 +203,8 @@ class UserController extends Controller
         }
         return redirect('/');
     }
+
+    //Menampilkan detail pengguna dalam format AJAX.
     public function show_ajax(string $id)
     {
         $user = UserModel::find($id);

@@ -4,6 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// Migration yang membuat tabel 'm_kategori' untuk menyimpan data kategori sepatu dengan kolom-kolom:
+// - kategori_id (primary key)
+// - kategori_kode (kode kategori, unique, max 10 karakter)
+// - kategori_nama (nama kategori, max 100 karakter)
+// - timestamps (created_at dan updated_at)
+
 return new class extends Migration
 {
     /**

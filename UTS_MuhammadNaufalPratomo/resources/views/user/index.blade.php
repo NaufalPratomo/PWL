@@ -1,3 +1,6 @@
+{{-- Halaman yang menampilkan daftar pengguna dalam bentuk tabel dengan fitur DataTables dan filter berdasarkan level.
+ --}}
+
 @extends('layouts.template')
 
 @section('content')

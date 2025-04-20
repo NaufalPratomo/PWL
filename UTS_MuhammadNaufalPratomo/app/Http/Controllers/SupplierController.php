@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class SupplierController extends Controller
 {
-    //Menampilkan halaman awal supplier
+    //Menampilkan halaman daftar supplier dengan breadcrumb dan informasi halaman.
     public function index()
     {
         $breadcrumb = (object) [
@@ -29,7 +29,7 @@ class SupplierController extends Controller
         return view('supplier.index', ['breadcrumb' => $breadcrumb, 'page' => $page, 'supplier' => $supplier, 'activeMenu' => $activeMenu]);
     }
 
-    // Ambil data supp dalam bentuk json untuk datatables
+    //Menyediakan data supplier dalam format JSON untuk DataTables dengan kolom aksi.
     public function list()
     {
         $supplier = SupplierModel::select('supplier_id', 'supplier_nama', 'supplier_kode');
@@ -48,11 +48,13 @@ class SupplierController extends Controller
             ->make(true);
     }
 
+    //Menampilkan halaman form AJAX untuk membuat supplier baru.
     public function create_ajax()
     {
         return view('supplier.create_ajax');
     }
 
+    //Menyimpan data supplier baru dari form AJAX dengan validasi.
     public function store_ajax(Request $request)
     {
         // cek apakah request berupa ajax
@@ -82,6 +84,7 @@ class SupplierController extends Controller
         return redirect('/');
     }
 
+    //Menampilkan halaman form AJAX untuk mengedit supplier.
     public function edit_ajax(string $id)
     {
         $supplier = SupplierModel::find($id);
@@ -91,6 +94,7 @@ class SupplierController extends Controller
         ]);
     }
 
+    //Memperbarui data supplier dari form AJAX dengan validasi.
     public function update_ajax(Request $request, $id)
     {
         // cek apakah request dari ajax
@@ -128,12 +132,14 @@ class SupplierController extends Controller
         return redirect('/');
     }
 
+    //Menampilkan konfirmasi sebelum menghapus data supplier.
     public function confirm_ajax(string $id)
     {
         $supplier = SupplierModel::find($id);
         return view('supplier.confirm_ajax', ['supplier' => $supplier]);
     }
 
+    //Menghapus data supplier berdasarkan ID melalui AJAX.
     public function delete_ajax(Request $request, $id)
     {
         // cek apakah request dari ajax
@@ -154,6 +160,8 @@ class SupplierController extends Controller
         }
         return redirect('/');
     }
+
+    //Menampilkan detail supplier dalam format AJAX.
     public function show_ajax(string $id)
     {
         $supplier = SupplierModel::find($id);

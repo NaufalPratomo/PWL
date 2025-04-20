@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+//Controller sederhana yang menampilkan halaman produk sepatu dengan kategori-kategori yang telah ditentukan. 
+//Controller ini hanya memiliki satu method yaitu index() yang mengembalikan view 'blog.products' dengan data kategori sepatu.
+
 class ProductsSepatuController extends Controller
 {
     public function index()

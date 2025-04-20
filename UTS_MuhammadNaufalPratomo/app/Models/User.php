@@ -10,6 +10,17 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
 
+// Model bawaan Laravel untuk autentikasi pengguna dengan fungsi-fungsi sebagai berikut:
+// - Menggunakan trait HasApiTokens untuk pengelolaan token API.
+// - Menggunakan trait HasFactory untuk factory pattern dalam testing.
+// - Menggunakan trait HasProfilePhoto untuk pengelolaan foto profil (dari Jetstream).
+// - Menggunakan trait Notifiable untuk pengiriman notifikasi.
+// - Menggunakan trait TwoFactorAuthenticatable untuk autentikasi dua faktor.
+// - Memiliki fillable fields 'name', 'email', dan 'password' untuk mass assignment.
+// - Memiliki hidden fields 'password', 'remember_token', 'two_factor_recovery_codes', dan 'two_factor_secret' untuk keamanan.
+// - Memiliki casts untuk 'email_verified_at' sebagai datetime.
+// - Memiliki appends 'profile_photo_url' untuk URL foto profil.
+
 class User extends Authenticatable
 {
     use HasApiTokens;

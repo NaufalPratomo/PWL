@@ -6,6 +6,8 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+// Seeder yang mengisi data awal untuk tabel m_level dengan level-level pengguna seperti Admin, Manager, dan Staff.
+
 class LevelSeeder extends Seeder
 {
     /**

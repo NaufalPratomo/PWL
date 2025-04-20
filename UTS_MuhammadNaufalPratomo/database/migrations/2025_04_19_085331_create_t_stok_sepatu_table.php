@@ -4,6 +4,14 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// Migration yang membuat tabel 't_stok' untuk menyimpan data stok sepatu dengan kolom-kolom:
+// - stok_id (primary key)
+// - sepatu_id (foreign key ke tabel m_sepatu)
+// - user_id (foreign key ke tabel m_user)
+// - stok_tanggal (tanggal stok)
+// - stok_jumlah (jumlah stok)
+// - timestamps (created_at dan updated_at)
+
 return new class extends Migration
 {
     /**

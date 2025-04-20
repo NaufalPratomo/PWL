@@ -4,6 +4,12 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+// Migration yang membuat tabel 'm_supplier' untuk menyimpan data supplier dengan kolom-kolom:
+// - supplier_id (primary key)
+// - supplier_kode (kode supplier, unique, max 20 karakter)
+// - supplier_nama (nama supplier, max 100 karakter)
+// - timestamps (created_at dan updated_at)
+
 return new class extends Migration
 {
     /**
