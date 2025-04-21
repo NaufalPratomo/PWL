@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use App\Models\KategoriModel;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Database\QueryException;
 
 class KategoriController extends Controller
 {
@@ -140,18 +141,24 @@ class KategoriController extends Controller
         return view('kategori.confirm_ajax', ['kategori' => $kategori]);
     }
 
-    //Menghapus data kategori berdasarkan ID melalui AJAX.
+    //Menghapus data level berdasarkan ID melalui AJAX.
     public function delete_ajax(Request $request, $id)
     {
-        // cek apakah request dari ajax
         if ($request->ajax() || $request->wantsJson()) {
             $kategori = KategoriModel::find($id);
             if ($kategori) {
-                $kategori->delete();
-                return response()->json([
-                    'status' => true,
-                    'message' => 'Data berhasil dihapus'
-                ]);
+                try {
+                    $kategori->delete();
+                    return response()->json([
+                        'status' => true,
+                        'message' => 'Data berhasil dihapus'
+                    ]);
+                } catch (QueryException $e) {
+                    return response()->json([
+                        'status' => false,
+                        'message' => 'Data gagal dihapus karena masih terdapat tabel lain yang terkait dengan data ini'
+                    ]);
+                }
             } else {
                 return response()->json([
                     'status' => false,
