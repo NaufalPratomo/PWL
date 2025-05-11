@@ -48,4 +48,12 @@ class UserModel extends Model
     {
         return $this->level->level_kode == $role;
     }
+
+    /**
+     *Mendapatkan kode role
+     */
+    public function getRole()
+    {
+        return $this->level->level_kode;
+    }
 }
