@@ -32,12 +32,16 @@
                         <td>{{ $barang->barang_id }}</td>
                     </tr>
                     <tr>
+                        <th>Kode Barang</th>
+                        <td>{{ $barang->barang_kode }}</td>
+                    </tr>
+                    <tr>
                         <th>Kategori</th>
                         <td>{{ $barang->kategori->kategori_nama }}</td>
                     </tr>
                     <tr>
-                        <th>Kode Barang</th>
-                        <td>{{ $barang->barang_kode }}</td>
+                        <th>Nama Barang</th>
+                        <td>{{ $barang->barang_nama }}</td>
                     </tr>
                     <tr>
                         <th>Harga Beli</th>
