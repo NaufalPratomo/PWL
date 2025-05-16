@@ -263,7 +263,7 @@ class BarangController extends Controller
     public function export_excel()
     {
         //ambil data barang yang akan di export
-        $barang = BarangModel::select('kategori_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual')
+        $barang = BarangModel::select('kategori_id', 'barang_kode', 'barang_nama', 'harga_beli', 'harga_jual', 'supplier_id')
             ->orderBy('kategori_id')
             ->with('kategori')
             ->get();
@@ -297,5 +297,22 @@ class BarangController extends Controller
         foreach(range('A','F')as $columnID){
             $sheet->getColumnDimension($columnID)->setAutoSize(true);
         }
+
+        $sheet->setTitle('Data Barang');
+
+        $writer = IOFactory::createWriter($spreadsheet, 'Xlsx');
+        $filename = 'Data Barang ' . date('Y-m-d H:i:s');
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment;filename=' . $filename . '.Xlsx');
+        header('Cache-Control: max-age=0');
+        header('Cache-Control: max-age=1');
+        header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
+        header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
+        header('Cache-Control: cache, must-revalidate');
+        header('Pragma: no-cache');
+
+        $writer->save('php://output');
+        exit;
     }
 }
