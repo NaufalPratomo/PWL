@@ -1,4 +1,19 @@
 <div class="sidebar">
+    <!-- User Profile -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+            @if(auth()->user()->profile_photo)
+                <img src="{{ asset('storage/' . auth()->user()->profile_photo) }}" class="img-circle elevation-2"
+                    alt="User Image">
+            @else
+                <img src="{{ asset('adminlte/dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
+                    alt="User Image">
+            @endif
+        </div>
+        <div class="info">
+            <a href="{{ route('profile.edit') }}" class="d-block">{{ Auth::user()->name }}</a>
+        </div>
+    </div>
     <!-- SidebarSearch Form -->
     <div class="form-inline mt-2">
         <div class="input-group" data-widget="sidebar-search">
@@ -33,6 +48,12 @@
     'active' : '' }}">
                     <i class="nav-icon far fa-user"></i>
                     <p>Data User</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('profile.edit') }}" class="nav-link {{ ($activeMenu == 'profile') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-user-circle"></i>
+                    <p>Edit Profil</p>
                 </a>
             </li>
             <li class="nav-header">Data Barang</li>

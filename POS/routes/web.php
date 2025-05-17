@@ -167,7 +167,7 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         Route::post('/barang/import_ajax', [BarangController::class, 'import_ajax']); // ajax imprt excel
         Route::get('/barang/export_excel', [BarangController::class, 'export_excel']); //export excel
         Route::get('/barang/export_pdf', [BarangController::class, 'export_pdf']); //export pdf
-        
+
 
     });
     // route User
@@ -219,5 +219,11 @@ Route::middleware(['auth'])->group(function () { // artinya semua route di dalam
         Route::post('/supplier/import_ajax', [SupplierController::class, 'import_ajax']); // ajax imprt excel
         Route::get('/supplier/export_excel', [SupplierController::class, 'export_excel']); //export excel
         Route::get('/supplier/export_pdf', [SupplierController::class, 'export_pdf']); //export pdf
+    });
+
+    // Routes untuk profil
+    Route::middleware('auth')->group(function () {
+        Route::get('/profile', [App\Http\Controllers\ProfileController::class, 'edit'])->name('profile.edit');
+        Route::put('/profile', [App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
     });
 });
