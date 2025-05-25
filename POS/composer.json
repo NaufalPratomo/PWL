@@ -15,6 +15,7 @@
         "laravel/tinker": "^2.8",
         "phpoffice/phpspreadsheet": "^4.2",
         "tightenco/ziggy": "^2.0",
+        "tymon/jwt-auth": "2.1.1",
         "yajra/laravel-datatables": "10.0"
     },
     "require-dev": {
