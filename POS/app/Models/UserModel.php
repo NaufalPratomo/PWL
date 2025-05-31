@@ -8,56 +8,10 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Monolog\Level;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class UserModel extends Authenticatable implements JWTSubject
 {
-    use HasFactory;
-    protected $table = 'm_user';
-    protected $primaryKey = 'user_id';
-    /**
-     * The attributes that are mass assignable.
-     * 
-     * @var array
-     */
-    protected $fillable = ['level_id', 'username', 'nama', 'password', 'profile_photo'];
-
-    protected $hidden = ['password'];
-    protected $casts = [
-        'password' => 'hashed',
-    ];
-
-    /**
-     * Relationship to the level table
-     */
-    public function level(): BelongsTo
-    {
-        return $this->belongsTo(LevelModel::class, 'level_id', 'level_id');
-    }
-
-    /**
-     * Get the role name
-     */
-    public function getRoleName(): string
-    {
-        return $this->level->level_nama;
-    }
-
-    /**
-     * Check if the user has a specific role
-     */
-    public function hasRole($role): bool
-    {
-        return $this->level->level_kode == $role;
-    }
-
-    /**
-     *Mendapatkan kode role
-     */
-    public function getRole()
-    {
-        return $this->level->level_kode;
-    }
-    
     /**
      * Get the identifier that will be stored in the JWT subject claim.
      */
@@ -69,5 +23,29 @@ class UserModel extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    protected $table = 'm_user';
+    protected $primaryKey = 'user_id';
+    protected $fillable = [
+        'username',
+        'nama',
+        'password',
+        'level_id',
+        'image' //tambahan
+    ];
+    public function level()
+    {
+        return $this->belongsTo(
+            LevelModel::class,
+            'level_id',
+            'level_id'
+        );
+    }
+    protected function image(): Attribute
+    {
+        return Attribute::make(
+            get: fn($image) => url('/storage/posts/' . $image),
+        );
     }
 }
