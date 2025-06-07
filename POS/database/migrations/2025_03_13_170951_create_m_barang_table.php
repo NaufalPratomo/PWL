@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('kategori_id');
             $table->unsignedBigInteger('supplier_id');
             $table->timestamps();
+            $table->string('image');
 
             // Foreign keys
             $table->foreign('kategori_id')->references('kategori_id')->on('m_kategori');

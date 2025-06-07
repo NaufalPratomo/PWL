@@ -42,7 +42,8 @@ class BarangController extends Controller
             'harga_beli',
             'harga_jual',
             'kategori_id',
-            'supplier_id'
+            'supplier_id',
+            'image',
         )->with(['kategori', 'supplier']);
         $kategori_id = $request->input('filter_kategori');
         if (!empty($kategori_id)) {
@@ -103,6 +104,7 @@ class BarangController extends Controller
                 'barang_nama' => ['required', 'string', 'max:100'],
                 'harga_beli' => ['required', 'numeric'],
                 'harga_jual' => ['required', 'numeric'],
+                'image'=> [ 'required','image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             ];
             $validator = Validator::make($request->all(), $rules);
             if ($validator->fails()) {
@@ -143,6 +145,7 @@ class BarangController extends Controller
                 'barang_nama' => ['required', 'string', 'max:100'],
                 'harga_beli' => ['required', 'numeric'],
                 'harga_jual' => ['required', 'numeric'],
+                'image'=> [ 'required','image', 'mimes:jpeg,png,jpg,gif,svg', 'max:2048'],
             ];
             // use Illuminate\Support\Facades\Validator;
             $validator = Validator::make($request->all(), $rules);
